@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jinbid.converter.comn.mappers.notice.noticeArea-mapper">
+
+    <!--        공고지역 목록을 조회한다.    -->
+    <select id="selectNoticeAreaList" parameterType="long" resultType="jinbid.converter.comn.vo.Notice">
+        SELECT A.ID,
+               A.NOTI_ID,
+               A.AREA_CD,
+               B.AREA_NM,
+               B.PRVNCL_CD,
+               B.PRVNCL_NM
+        FROM NOTI_AREA A,
+             AREA_CODE B
+        WHERE A.AREA_CD = B.AREA_CD
+        AND A.NOTI_ID = #{notiId}
+        AND A.USE_YN = 'Y'
+        ORDER BY B.PRVNCL_NM ASC
+    </select>
+    
+    <!--        공고지역을 입력한다.    -->
+    <!-- <insert id="insertNoticeArea" parameterType="jinbid.converter.comn.vo.NoticeArea"> -->
+    <insert id="insertNoticeArea" parameterType="Map">
+        INSERT INTO NOTI_AREA (NOTI_ID,
+                               AREA_CD,
+                               FIRST_INPUT_DT,
+                               FIRST_INPTPS,
+                               LAST_UPDT_DT,
+                               LAST_AMNDR,
+                               USE_YN)
+        VALUES
+        <foreach collection="list"  item="Area"  separator=" , " >
+        (#{Area.notiId},
+                #{Area.areaCd},
+                now(),
+                'batch2_insert',
+                now(),
+                'batch2_insert',
+                'Y')
+       </foreach>  
+    </insert>
+    
+    <!--        공고지역을 수정한다.    -->
+    <update id="updateNoticeArea" parameterType="jinbid.converter.comn.vo.NoticeArea">
+        UPDATE NOTI_AREA
+        SET USE_YN = #{useYn},
+            LAST_UPDT_DT = now(),
+            LAST_AMNDR = 'batch2_update'
+        WHERE ID = #{id}
+    </update>
+
+</mapper>

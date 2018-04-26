@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jinbid.converter.comn.mapper.NoticeAtchmnflDao">
+
+    <!--        공고첨부파일 목록을 조회한다.    -->
+    <select id="selectNoticeAtchmnfList" parameterType="long" resultType="jinbid.converter.comn.vo.NoticeAtchmnfl">
+        SELECT A.ID,
+               A.NOTI_ID,
+               A.FILE_DSTNCT_NM,
+               A.FILE_NM,
+               A.FILE_PATH_NM,
+               A.FILE_ORDR,
+               A.EXTRNL_FILE_YN
+        FROM NOTI_ATCHMNFL A
+        WHERE A.NOTI_ID = #{notiId}
+        AND A.USE_YN = 'Y'
+        ORDER BY A.FILE_ORDR
+    </select>
+    
+    <!--        공고첨부파일을 조회한다.    -->
+    <select id="selectNoticeAtchmnf" parameterType="long" resultType="jinbid.converter.comn.vo.NoticeAtchmnfl">
+        SELECT A.ID,
+               A.NOTI_ID,
+               A.FILE_DSTNCT_NM,
+               A.FILE_NM,
+               A.FILE_PATH_NM,
+               A.FILE_ORDR,
+               A.EXTRNL_FILE_YN
+        FROM NOTI_ATCHMNFL A
+        WHERE A.ID = #{id}
+        AND A.USE_YN = 'Y'
+    </select>
+
+    <!--        공고첨부파일을 입력한다.    -->
+    <!-- <insert id="insertNoticeAtchmnfl" parameterType="jinbid.converter.comn.vo.NoticeAtchmnfl"> -->
+    <insert id="insertNoticeAtchmnfl" parameterType="Map">
+        INSERT INTO NOTI_ATCHMNFL (NOTI_ID,
+                                   FILE_DSTNCT_NM,
+                                   FILE_NM,
+                                   FILE_PATH_NM,
+                                   FILE_ORDR,
+                                   EXTRNL_FILE_YN,
+                                   FIRST_INPUT_DT,
+                                   FIRST_INPTPS,
+                                   LAST_UPDT_DT,
+                                   LAST_AMNDR,
+                                   USE_YN)
+        VALUES 
+        <foreach collection="list" item="Atch" separator=" , ">
+		        (#{Atch.notiId},
+		                #{Atch.fileDstnctNm},
+		                #{Atch.fileNm},
+		                #{Atch.filePathNm},
+		                #{Atch.fileOrdr},
+		                #{Atch.extrnlFileYn},
+		                now(),
+		                'batch2_insert',
+		                now(),
+		                'batch2_insert',
+		                'Y')
+                </foreach>
+    </insert>
+    
+    <!--        공고첨부파일을 수정한다.    -->
+    <update id="updateNoticeAtchmnfl" parameterType="jinbid.converter.comn.vo.NoticeAtchmnfl">
+        UPDATE NOTI_ATCHMNFL
+        SET USE_YN = #{useYn},
+            LAST_UPDT_DT = now(),
+            LAST_AMNDR = 'batch2_insert'
+        WHERE ID = #{id}
+   </update>
+   
+</mapper>

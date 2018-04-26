@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jinbid.converter.comn.mapper.NoticeLicnsDao">
+
+    <!--        공고면허 목록을 조회한다.    -->
+    <select id="selectNoticeLicnsList" parameterType="long" resultType="jinbid.converter.comn.vo.NoticeLicns">
+        SELECT A.ID,
+               A.NOTI_ID,
+               A.LICNS_CD,
+               A.LICNS_NM,
+               A.LICNS_CTGY_NM,
+               A.LICNS_GROUP,
+               A.LICNS_DSTNCT_CD,
+               (SELECT COMN_CD_NM FROM COMN_CODE WHERE COMN_CD_GROUP_ID = 'LICNS_DSTNCT_CD' AND COMN_CD = A.LICNS_DSTNCT_CD) AS LICNS_DSTNCT_CD_NM
+        FROM NOTI_LICNS A
+        WHERE A.NOTI_ID = #{notiId}
+        AND A.USE_YN = 'Y'
+        ORDER BY A.LICNS_DSTNCT_CD ASC, A.LICNS_CTGY_NM ASC
+    </select>
+
+    <!--        공고면허를 입력한다.    -->
+    <insert id="insertNoticeLicns" parameterType="jinbid.converter.comn.vo.NoticeLicns">
+        INSERT INTO NOTI_LICNS (NOTI_ID,
+                                LICNS_CD,
+                                LICNS_NM,
+                                LICNS_CTGY_NM,
+                                LICNS_GROUP,
+                                LICNS_DSTNCT_CD,
+                                FIRST_INPUT_DT,
+                                FIRST_INPTPS,
+                                LAST_UPDT_DT,
+                                LAST_AMNDR,
+                                USE_YN)
+        VALUES 							
+           <foreach collection="list" item="Licns" separator=" , ">
+	 	       (#{Licns.notiId},
+                #{Licns.licnsCd},
+                #{Licns.licnsNm},
+                #{Licns.licnsCtgyNm},
+                #{Licns.licnsGroup},
+                #{Licns.licnsDstnctCd},
+                now(),
+                'batch2_insert',
+                now(),
+                'batch2_insert',
+                'Y')
+       </foreach>
+                
+    </insert>
+    
+    <!--        공고면허를 수정한다.    -->
+    <update id="updateNoticeLicns" parameterType="jinbid.converter.comn.vo.NoticeLicns">
+        UPDATE NOTI_LICNS
+        SET USE_YN = #{useYn},
+            LAST_UPDT_DT = now(),
+            LAST_AMNDR = 'BID_MANAGER'
+        WHERE ID = #{id}
+    </update>
+
+</mapper>

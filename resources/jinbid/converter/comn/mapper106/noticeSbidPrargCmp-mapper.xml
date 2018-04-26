@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jinbid.converter.comn.mapper106.NoticeSbidPrargCmp106Dao">
+
+	<!-- 공고낙찰예정업체 조회 -->
+	<select id="selectNoticeSbidPrargCmp"  parameterType="Map" resultType="jinbid.converter.comn.vo.NoticeSbidPrargCmp">
+	<![CDATA[ 
+			SELECT 
+			#{id} as NOTI_ID
+			, CompanyName as CMP_NM
+			, BossName as RPSNTV_NM
+			, CompanyNumber as BIZ_NO
+			, ResultPrice as BDDPR_AMT
+			, 'N' as LAST_SBID_YN
+			, updateTime as FIRST_INPUT_DT
+			FROM NoticeTables.S_NoticeResult
+	        WHERE KeyBaseTable = #{prfId}
+	        limit 1
+         ]]>
+	</select>
+
+	
+</mapper>
