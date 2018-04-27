@@ -1,4 +1,4 @@
-package converter.jobs.noti;
+package converter.jobs;
 
 
 import java.util.HashMap;
