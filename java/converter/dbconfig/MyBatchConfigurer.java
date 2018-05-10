@@ -37,8 +37,9 @@ public class MyBatchConfigurer extends DefaultBatchConfigurer{
         sqlSessionFactoryBean.setDataSource(db1DataSource);
         sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:converter/comn/mybatis-config.xml"));
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:converter/comn/mapper/*-mapper.xml"));
-//        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:jinbid/converter/comn/mapper/*Dao.java"));
-        return sqlSessionFactoryBean.getObject();
+    	SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
+        sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
+        return sqlSessionFactory;
     }
 	
     @Primary
@@ -48,8 +49,9 @@ public class MyBatchConfigurer extends DefaultBatchConfigurer{
         sqlSessionFactoryBean.setDataSource(db2DataSource);
         sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:converter/comn/mybatis-config.xml"));
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:converter/comn/mapper106/*-mapper.xml"));
-//        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:jinbid/converter/comn/mapper106/*106Dao.java"));
-        return sqlSessionFactoryBean.getObject();
+	SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
+        sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
+        return sqlSessionFactory;
     }
 
        @Bean(name = "db1SqlSessionTemplate")
