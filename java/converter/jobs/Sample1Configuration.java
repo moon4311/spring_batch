@@ -27,7 +27,6 @@ import converter.jobs.listener.SampleStepListener;
 import converter.jobs.processor.SampleItemProcessor;
 import converter.jobs.writer.SampleItemWriter;
 
-
 @Configuration
 @EnableBatchProcessing
 public class SampleConfiguration {
