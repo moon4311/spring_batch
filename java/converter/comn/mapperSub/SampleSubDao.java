@@ -1,4 +1,4 @@
-package converter.comn.mapper106;
+package converter.comn.mapperSub;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import converter.comn.vo.Sample;
 
 
 @Mapper
-public interface Sample106Dao {
+public interface SampleSubDao {
 /**
- *  구DB 에서Table의 항목들 조회
+ *  SubDB 에서Table의 항목들 조회
  */
 
 	/**

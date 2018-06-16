@@ -29,6 +29,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 import converter.comn.vo.Sample;
+import converter.jobs.listener.SampleJobListener;
 import converter.jobs.writer.NewItemWriter;
 import converter.jobs.writer.ModifyItemWriter;
 
@@ -83,10 +84,9 @@ public class SampleConfiguration {
     private MyBatisCursorItemReader<Sample> getItemReader(String queryId){
     	MyBatisCursorItemReader<Sample> itemReader = new MyBatisCursorItemReader<Sample>();
         itemReader.setSqlSessionFactory(db2SqlSessionFactory);
-    /*    Map<String,Object> params = new HashMap<String, Object>();
-        itemReader.setParameterValues(params);*/
+        Map<String,Object> params = new HashMap<String, Object>();
+        itemReader.setParameterValues(params);
         itemReader.setQueryId(queryId);
-        itemReader.setMaxItemCount(MaxCount);	//리스트크기
         return itemReader;
     }
     
@@ -105,7 +105,7 @@ public class SampleConfiguration {
 		return new ModifyItemWriter();
 	}
 	
-	@Bean("noticeJobListener")
+	@Bean("sampleJobListener")
 	public JobExecutionListener sampleJobListener(){
 		return new SampleJobListener();
 	}

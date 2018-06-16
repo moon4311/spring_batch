@@ -7,7 +7,7 @@ import converter.comn.vo.Sample;
 import java.util.Map;
 
 /**
- * 공고 DAO
+ * DAO
  *
  * @author Kim Jae Moon
  * @since 2017. 4. 06.

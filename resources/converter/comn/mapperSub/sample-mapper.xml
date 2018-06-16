@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="converter.comn.mapper106.Sample106Dao">
+<mapper namespace="converter.comn.mapperSub.SampleSubDao">
 	<!-- 공고 진행 조회 -->
-	<select id="selectSampleBase"  parameterType="Map" resultType="converter.comn.vo.Sample">
+	<select id="selectSampleBase" parameterType="Map"
+		resultType="converter.comn.vo.Sample">
 	<![CDATA[ 
 		select 1 from dual
          ]]>

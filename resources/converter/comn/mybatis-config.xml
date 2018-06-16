@@ -3,29 +3,19 @@
 
 <configuration>
 
-    <settings>
-        <!--
-            ※ 캐시 기본 사용여부(default: true)
+	<settings>
+		<!-- ※ 캐시 기본 사용여부(default: true) □ 기본적으로 로컬 캐시므로 서버가 여러 대인 경우 데이터 변경에 대한 
+			전체 서버에 캐시 반영의 문제가 있음 □ 한 대의 서버만 운영하거나 여러 대의 서버라도 캐시 데이터의 동일성이 문제가 되지 않는다면 
+			문제가 되지 않음 -->
+		<setting name="cacheEnabled" value="true" />
 
-            □ 기본적으로 로컬 캐시므로 서버가 여러 대인 경우 데이터 변경에 대한 전체 서버에 캐시 반영의 문제가 있음
-            □ 한 대의 서버만 운영하거나 여러 대의 서버라도 캐시 데이터의 동일성이 문제가 되지 않는다면 문제가 되지 않음
-        -->
-        <setting name="cacheEnabled" value="true"/>
+		<!-- ※ 생성키 사용여부(default: false) □ MySQL-auto_increment, Oracle-sequence, 
+			SQL Server-identify 생성키 제공 -->
+		<setting name="useGeneratedKeys" value="true" />
 
-        <!--
-            ※ 생성키 사용여부(default: false)
-
-            □ MySQL-auto_increment, Oracle-sequence, SQL Server-identify 생성키 제공
-
-        -->
-        <setting name="useGeneratedKeys" value="true"/>
-
-        <!--
-            ※ 테이블 컬럼명과 자바 속성명 매핑여부(default: false)
-
-            □ 테이블 컬럼명의 구분은 _(언더바), 자바의 속성명은 낙타표기법이므로 이 둘 간의 매핑여부를 결정함
-        -->
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
-    </settings>
+		<!-- ※ 테이블 컬럼명과 자바 속성명 매핑여부(default: false) □ 테이블 컬럼명의 구분은 _(언더바), 자바의 
+			속성명은 낙타표기법이므로 이 둘 간의 매핑여부를 결정함 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
 
 </configuration>

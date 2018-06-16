@@ -48,17 +48,21 @@ public class ScheduledTasks {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * @Scheduled(fixedRate = 1000)  : 현재실행 후  fixedRate(밀리초) 마다 실행
+	 * @Scheduled(cron ="0 0 * * * ?")  : * 월 * 일 * 시 0분 0초 마다 실행
+	 */
 	@Scheduled(fixedRate = 60000)	//60초 마다
 	public void noticeConfRun(){
-		jobRun(noticeConfiguration.job(),new Object(){}.getClass().getEnclosingMethod().getName() );
+		jobRun(Sample1Configuration.job(),new Object(){}.getClass().getEnclosingMethod().getName() );
 		
 	}
 
+//	@Scheduled(cron = "0 0 * * * ?") // 매시간 마다
 	@Scheduled(cron = "0 0 8,12,18 * * ?") // 매일 8시,12시,18시
-//	@Scheduled(cron = "5,25,45 * 11 * * ?")
-	public void notice3DaysConfRun(){
-		jobRun(notice3DaysConfiguration.job(), new Object(){}.getClass().getEnclosingMethod().getName());
+	public void sampleConfRun(){
+		jobRun(Sample2Configuration.job(), new Object(){}.getClass().getEnclosingMethod().getName());
 		
 	}
 	
