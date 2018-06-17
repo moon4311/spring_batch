@@ -8,13 +8,16 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
-import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.support.transaction.TransactionAwareProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import converter.comn.mapperSub.SampleAreaSubDao;
+import converter.comn.vo.Sample;
+import converter.comn.vo.SampleArea;
 
 /**
  * 공고수집 ItemWriter
@@ -22,8 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Kim Jae Moon
  * @since 2017. 4. 06.
  */
-public class ModifyItemWriter implements ItemWriter<Sample> {
-
+public class NewItemWriter implements ItemWriter<Sample> {
 
 	/*		테스트 DB		*/
 	@Resource(name="db1SqlSessionFactory")
@@ -31,7 +33,8 @@ public class ModifyItemWriter implements ItemWriter<Sample> {
 	
 	
 	@Autowired
-	private SampleArea106Dao sampleArea106Dao;
+	private SampleAreaSubDao sampleAreaSubDao;
+	
 	
     @Override
     public void write(List<? extends Sample> sampleList) throws Exception {
@@ -39,21 +42,21 @@ public class ModifyItemWriter implements ItemWriter<Sample> {
     	MyBatisBatchItemWriter<Sample> itemWriter = new MyBatisBatchItemWriter<>() ;
 		itemWriter.setSqlSessionFactory(db1SqlSessionFactory);
 		itemWriter.setStatementId("insertSample");
-		itemWriter.setAssertUpdates(false);
     	itemWriter.write(sampleList);
     	
     	//지역
     	MyBatisBatchItemWriter<SampleArea> itemWriter2 = new MyBatisBatchItemWriter<>() ;
     	itemWriter2.setSqlSessionFactory(db1SqlSessionFactory);
-    	itemWriter2.setStatementId("insertSampleArea");
-
+    	itemWriter2.setStatementId("insertNoticeArea");
+    	
     	for(Sample sample : sampleList){
-    		Map map = new HashMap();
+    		Map<String,Object> map = new HashMap<String,Object>();
     		map.put("id", sample.getId());
         	// 지역
-        	itemWriter2.write(sampleArea106Dao.selectSampleArea(map));
+        	itemWriter2.write(sampleAreaSubDao.selectSampleArea(map));
     	}
-        
+    	
     }
+    
     
 }

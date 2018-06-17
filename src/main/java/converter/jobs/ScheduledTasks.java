@@ -1,4 +1,4 @@
-package jinbid.converter.jobs.noti;
+package converter.jobs;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
@@ -13,7 +13,6 @@ import org.springframework.batch.core.repository.support.MapJobRepositoryFactory
 import org.springframework.batch.support.transaction.ResourcelessTransactionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -22,10 +21,10 @@ public class ScheduledTasks {
 	
 	
 	@Autowired
-	NoticeConfiguration noticeConfiguration;
+	Sample1Configuration noticeConfiguration;
 	
 	@Autowired
-	Notice3DaysConfiguration notice3DaysConfiguration;
+	Sample2Configuration notice3DaysConfiguration;
 	
 	@Autowired
 	private SimpleJobLauncher simpleJobLauncher;

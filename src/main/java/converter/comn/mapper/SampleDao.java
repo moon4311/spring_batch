@@ -1,7 +1,5 @@
 package converter.comn.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import converter.comn.vo.Sample;
 
 import java.util.Map;

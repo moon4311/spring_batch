@@ -21,16 +21,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
-import converter.comn.vo.sample;
+import converter.comn.vo.Sample;
 import converter.jobs.listener.SampleStepListener;
 import converter.jobs.processor.SampleItemProcessor;
 import converter.jobs.writer.SampleItemWriter;
 
 @Configuration
 @EnableBatchProcessing
-public class SampleConfiguration {
+public class Sample1Configuration {
 
+	int MaxCount =1000;
+	
+	
 	@Autowired
     private JobBuilderFactory jobBuilderFactory;
 
@@ -55,7 +57,7 @@ public class SampleConfiguration {
     @Bean("step1")	//신규
     public Step step1() {
         return stepBuilderFactory.get("step1")
-                .<sample, sample>chunk(MaxCount)
+                .<Sample, Sample>chunk(MaxCount)
                 .reader(getPagingItemReader("converter.comn.mapper106.sample106Dao.selectsampleBase"))
                 .processor(sampleItemProcessor())
                 .writer(sampleItemWriter())
@@ -63,8 +65,8 @@ public class SampleConfiguration {
                 .build();
     }
 
-    private MyBatisPagingItemReader<sample> getPagingItemReader(String queryId){
-    	MyBatisPagingItemReader<sample> itemReader = new MyBatisPagingItemReader<sample>();
+    private MyBatisPagingItemReader<Sample> getPagingItemReader(String queryId){
+    	MyBatisPagingItemReader<Sample> itemReader = new MyBatisPagingItemReader<Sample>();
         itemReader.setSqlSessionFactory(db2SqlSessionFactory);
         Map<String,Object> params = new HashMap<String, Object>();
         
@@ -80,18 +82,18 @@ public class SampleConfiguration {
     }
 
 	@Bean("sampleItemProcessor")
-	public ItemProcessor<sample, sample> sampleItemProcessor() {
-		return  new sampleItemProcessor();
+	public ItemProcessor<Sample, Sample> sampleItemProcessor() {
+		return  new SampleItemProcessor();
 	}
 
 	@Bean("sampleItemWriter")
-	public ItemWriter<sample> sampleItemWriter() {
-		return new sampleItemWriter();
+	public ItemWriter<Sample> sampleItemWriter() {
+		return new SampleItemWriter();
 	}
 
 	@Bean("sampleStepListener")
 	public StepExecutionListener sampleStepListener(){
-		return new sampleStepListener();
+		return new SampleStepListener();
 	}
 	
 	//다중 writer 쓸 때

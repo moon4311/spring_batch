@@ -30,12 +30,13 @@ import org.springframework.context.annotation.Configuration;
 
 import converter.comn.vo.Sample;
 import converter.jobs.listener.SampleJobListener;
+import converter.jobs.processor.SampleItemProcessor;
 import converter.jobs.writer.NewItemWriter;
 import converter.jobs.writer.ModifyItemWriter;
 
 @Configuration
 @EnableBatchProcessing
-public class SampleConfiguration {
+public class Sample2Configuration {
 
 	private static final int MaxCount = 1000;
 	

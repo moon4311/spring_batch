@@ -1,9 +1,9 @@
-package jinbid.converter.jobs.noti.listener;
+package converter.jobs.listener;
 
 import org.springframework.batch.core.ChunkListener;
 import org.springframework.batch.core.scope.context.ChunkContext;
 
-public class NoticeChunkListener implements ChunkListener{
+public class SampleChunkListener implements ChunkListener{
 
 	@Override
 	public void beforeChunk(ChunkContext context) {

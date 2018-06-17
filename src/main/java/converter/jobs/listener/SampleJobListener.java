@@ -1,7 +1,6 @@
 package converter.jobs.listener;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.annotation.Resource;

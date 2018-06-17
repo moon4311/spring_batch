@@ -1,7 +1,5 @@
 package converter.jobs.listener;
 
-import java.util.Calendar;
-
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,7 +24,6 @@ public class SampleStepListener implements StepExecutionListener{
     	
     	int readCnt = stepExecution.getReadCount();
     	int writeCnt = stepExecution.getWriteCount();
-    	endTime = System.currentTimeMillis();
     	SqlSession session = db1SqlSessionFactory.openSession();
     	session.update("updatexxxxx");
     	
