@@ -13,6 +13,7 @@ import org.springframework.batch.core.repository.support.MapJobRepositoryFactory
 import org.springframework.batch.support.transaction.ResourcelessTransactionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,10 +22,10 @@ public class ScheduledTasks {
 	
 	
 	@Autowired
-	Sample1Configuration noticeConfiguration;
+	Sample1Configuration sample1Configuration;
 	
 	@Autowired
-	Sample2Configuration notice3DaysConfiguration;
+	Sample2Configuration sample2Configuration;
 	
 	@Autowired
 	private SimpleJobLauncher simpleJobLauncher;
@@ -54,14 +55,14 @@ public class ScheduledTasks {
 	 */
 	@Scheduled(fixedRate = 60000)	//60초 마다
 	public void noticeConfRun(){
-		jobRun(Sample1Configuration.job(),new Object(){}.getClass().getEnclosingMethod().getName() );
+		jobRun(sample1Configuration.job(),new Object(){}.getClass().getEnclosingMethod().getName() );
 		
 	}
 
 //	@Scheduled(cron = "0 0 * * * ?") // 매시간 마다
 	@Scheduled(cron = "0 0 8,12,18 * * ?") // 매일 8시,12시,18시
 	public void sampleConfRun(){
-		jobRun(Sample2Configuration.job(), new Object(){}.getClass().getEnclosingMethod().getName());
+		jobRun(sample2Configuration.job(), new Object(){}.getClass().getEnclosingMethod().getName());
 		
 	}
 	

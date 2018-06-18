@@ -14,27 +14,26 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import converter.comn.vo.Sample;
+import converter.comn.vo.SampleArea;
 
 /**
- * 개찰 공고수집 ItemWriter
+ * ItemWriter
  *
  * @author Kim Jae Moon
  * @since 2017. 4. 06.
  */
+
 public class SampleItemWriter implements ItemWriter<Sample>, ItemWriteListener<Sample> {
 
 	Long startTime;
 	
-	/*		테스트 DB		*/
+	/*		main DB		*/
 	@Resource(name="db1SqlSessionFactory")
 	private SqlSessionFactory db1SqlSessionFactory;
 
 	/*		테스트 DB		*/
 	@Resource(name="db2SqlSessionFactory")
 	private SqlSessionFactory db2SqlSessionFactory;
-	
-	
-	
 	
 	@Override
 	public void beforeWrite(List<? extends Sample> items) {
@@ -56,9 +55,9 @@ public class SampleItemWriter implements ItemWriter<Sample>, ItemWriteListener<S
     		Map<String,Object> map = new HashMap<String,Object>();
     		map.put("id", Sample.getId());
     		
-    		List<SampleAtchmnfl> licnsList = db2SqlSessionFactory.openSession().selectList("selectSampleLicense",map);
+    		List<SampleArea> licnsList = db2SqlSessionFactory.openSession().selectList("selectSampleArea",map);
 
-    		insertMap("insertSampleLicns",licnsList);
+    		insertMap("insertSampleArea",licnsList);
     		
     	}
     	

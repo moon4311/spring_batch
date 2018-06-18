@@ -29,4 +29,6 @@ public class Sample extends Basic{
     /** 사용여부 */
     private String useYn = "Y";
     
+    /** 구ID */
+    private String prfId;
 }

@@ -51,6 +51,7 @@ public class Sample1Configuration {
         return  jobBuilderFactory.get("testJob")
                 .incrementer(new RunIdIncrementer())
                 .start(step1())
+//                .next(step2())
                 .build();
     }
    

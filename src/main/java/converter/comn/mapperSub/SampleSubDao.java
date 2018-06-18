@@ -2,6 +2,8 @@ package converter.comn.mapperSub;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import converter.comn.vo.Sample;
 
 

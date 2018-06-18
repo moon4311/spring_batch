@@ -4,6 +4,8 @@ import converter.comn.vo.Sample;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
+
 /**
  * DAO
  *
