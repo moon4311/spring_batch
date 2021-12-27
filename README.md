@@ -1,5 +1,5 @@
 # spring_batch
-sring_batch [spring boot + mybatis + mysql]
+spring_batch [spring boot + mybatis + mysql]
 
 
 Flow 1
